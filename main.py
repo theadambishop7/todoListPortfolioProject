@@ -60,7 +60,7 @@ def add_todo():
         todo = Todo(
             todo_text=form.todo.data,
             due_date=form.due_date.data,
-            complete=False
+            complete=False,
         )
         db.session.add(todo)
         db.session.commit()
