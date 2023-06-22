@@ -43,10 +43,10 @@ html, body {
     background-position: center;
     background-repeat: no-repeat;
     background-size: 110%;
-    filter: blur(12px);
-    -webkit-filter: blur(12px);
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
     z-index: -1;
-    transform: scale(1.1);
+    transform: scale(1.5);
 }
 
 .list-class {
