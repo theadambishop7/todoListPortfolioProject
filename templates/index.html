@@ -33,6 +33,7 @@
           <button type="button" class="btn btn-primary" id="addTodoButton">Add Todo</button>
         </div>
 {% if completed_exists %}
+    <div class="completed-color">
     <h4 class="completed-margin my-3 text-secondary">Completed Items:</h4>
     <table class="table text-secondary">
     {% if todo_list %}
@@ -53,7 +54,8 @@
         {% endfor %}
     {% endif %}
     </table>
-<a href="{{ url_for('delete_completed') }}"><button type="button" class="btn btn-secondary-outline pull-right">Clear</button></a>
+    </div>
+<a href="{{ url_for('delete_completed') }}"><button type="button" class="btn btn-secondary pull-right">Clear</button></a>
 {% endif %}
 </div>
 

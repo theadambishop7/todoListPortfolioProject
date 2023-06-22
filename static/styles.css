@@ -28,6 +28,10 @@ html, body {
     margin-top: 100px !important;
 }
 
+.completed-color {
+    color: #CCC !important;
+}
+
 .bg-image::after {
     content: "";
     position: absolute;
