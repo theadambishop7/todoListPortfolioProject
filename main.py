@@ -1,10 +1,9 @@
 from flask import Flask, render_template, url_for, redirect, request, jsonify
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
-from wtforms import StringField, BooleanField, SubmitField, DateField
-from wtforms.validators import DataRequired, InputRequired
+from wtforms import StringField, SubmitField, DateField
+from wtforms.validators import DataRequired
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.orm import relationship
 from datetime import datetime
 import os
 
@@ -12,7 +11,7 @@ app = Flask(__name__)
 Bootstrap(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todos.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = "nasjdhfq982y4hniquhsdfkha8s7dyf"
+app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
 db = SQLAlchemy(app)
 app.app_context().push()
 
