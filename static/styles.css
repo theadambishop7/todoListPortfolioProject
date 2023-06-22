@@ -1,0 +1,52 @@
+.vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+  display: flex;
+  align-items: center;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.bg-image {
+    position: relative;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.list-padding {
+    padding: 30px !important;
+    border-radius: 20px;
+}
+
+.completed-margin {
+    margin-top: 100px !important;
+}
+
+.bg-image::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-image: url("/static/forest.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 110%;
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+    z-index: -1;
+}
+
+.list-class {
+    background-image: url("/static/bamboo-wood.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

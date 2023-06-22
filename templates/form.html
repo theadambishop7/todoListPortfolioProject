@@ -1,0 +1,8 @@
+{% import "bootstrap/wtf.html" as wtf %}
+<form id="addTodoForm" action="{{ url_for('add_todo') }}" method="post">
+    {{ form.hidden_tag() }}
+    {{ wtf.form_errors(form, "only") }}
+    {{ wtf.form_field(form.todo) }}
+    {{ wtf.form_field(form.due_date) }}
+    <button class="btn btn-primary" type="submit">Create</button>
+</form>

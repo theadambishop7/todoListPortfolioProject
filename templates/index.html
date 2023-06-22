@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block content %}
+<body>
+<div class="bg-image">
+    <div class="container list-class list-padding">
+        <h3 class="mb-2">Your Todo Items:</h3>
+        <table class="table">
+        {% if todo_list %}
+            <thead>
+                <tr>
+                    <th> </th>
+                    <th>Description</th>
+                    <th>Due Date</th>
+                    <th> </th>
+                </tr>
+            </thead>
+            {% set num = [0] %}
+            {% for item in todo_list %}
+                {% if item.complete == False %}
+                    {% set _dummy = num.append(num.pop() + 1) %}
+                    <tr>
+                        <td>{{ num[0] }}</td>
+                        <td>{{ item.todo_text }}</td>
+                        <td>{{ item.due_date }}</td>
+                        <td><input type="checkbox" id="completeCheckbox{{ item.id }}" data-url="{{ url_for('complete_item', todo_item=item.id) }}"></td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        </table>
+        <div>
+          <button type="button" class="btn btn-primary" id="addTodoButton">Add Todo</button>
+        </div>
+{% if completed_exists %}
+    <h4 class="completed-margin my-3 text-secondary">Completed Items:</h4>
+    <table class="table text-secondary">
+    {% if todo_list %}
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Due Date</th>
+            </tr>
+        </thead>
+        {% for item in todo_list %}
+            {% if item.complete == True %}
+                <tr>
+                    <td class="text-secondary"><del>{{ item.todo_text }}</del></td>
+                    <td class="text-secondary"><del>{{ item.due_date }}</del></td>
+                    <td class="text-secondary"><input type="checkbox" id="uncompleteCheckbox{{ item.id }}" data-url="{{ url_for('uncomplete_item', todo_item=item.id) }}" checked></td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    </table>
+<a href="{{ url_for('delete_completed') }}"><button type="button" class="btn btn-secondary-outline pull-right">Clear</button></a>
+{% endif %}
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addTodoModal" tabindex="-1" role="dialog" aria-labelledby="addTodoModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addTodoModalLabel">Add Todo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="addTodoModalBody">
+        <!-- The form will be inserted here -->
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</body>
+
+{% block javascript %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    {% for item in todo_list %}
+        {% if item.complete == False %}
+            document.getElementById('completeCheckbox{{ item.id }}').addEventListener('change', function () {
+                if (this.checked) {
+                    window.location = this.getAttribute('data-url');
+                }
+            });
+        {% else %}
+            document.getElementById('uncompleteCheckbox{{ item.id }}').addEventListener('change', function () {
+                if (!this.checked) {
+                    window.location = this.getAttribute('data-url');
+                }
+            });
+        {% endif %}
+    {% endfor %}
+</script>
+<script>
+    $(document).ready(function() {
+        $("#addTodoButton").click(function() {
+            $.ajax({
+                url: '{{ url_for("add_todo_form") }}',
+                success: function(data) {
+                    console.log("Success:", data);  // Log the data from the server.
+                    $("#addTodoModalBody").html(data);
+                    $("#addTodoModal").modal('show');
+                },
+                error: function(request, status, error) {
+                    console.log("Error:", request, status, error);  // Log any error that happens during the request.
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}
+
+
+{% endblock %}

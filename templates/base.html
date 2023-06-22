@@ -1,0 +1,14 @@
+{% extends "bootstrap/base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="/static/styles.css">
+{{ super() }}
+<style>
+
+@media (min-width: 1200px) {
+    .container{
+        max-width: 600px;
+    }
+}
+</style>
+{% endblock %}
