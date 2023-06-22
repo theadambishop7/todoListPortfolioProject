@@ -5,7 +5,7 @@
 <div class="bg-image">
     <div class="container list-class list-padding">
         <h3 class="mb-2">Your Todo Items:</h3>
-        <table class="table">
+        <table class="table fs-4">
         {% if todo_list %}
             <thead>
                 <tr>
@@ -34,13 +34,14 @@
         </div>
 {% if completed_exists %}
     <div class="completed-color">
-    <h4 class="completed-margin my-3 text-secondary">Completed Items:</h4>
+    <h4 class="completed-margin mt-10 text-secondary">Completed Items:</h4>
     <table class="table text-secondary">
     {% if todo_list %}
         <thead>
             <tr>
                 <th>Description</th>
                 <th>Due Date</th>
+                <th> </th>
             </tr>
         </thead>
         {% for item in todo_list %}
@@ -55,7 +56,7 @@
     {% endif %}
     </table>
     </div>
-<a href="{{ url_for('delete_completed') }}"><button type="button" class="btn btn-secondary pull-right">Clear</button></a>
+<a href="{{ url_for('delete_completed') }}"><button type="button" class="btn btn-secondary-outline pull-right">Clear</button></a>
 {% endif %}
 </div>
 
