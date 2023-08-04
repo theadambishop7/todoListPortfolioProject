@@ -32,6 +32,11 @@ html, body {
     color: #CCC !important;
 }
 
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+}
+
 .bg-image::after {
     content: "";
     position: absolute;
